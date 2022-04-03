@@ -35,12 +35,6 @@ class _ShrineAppState extends State<ShrineApp> {
 
   Category _currentCategory = Category.all;
 
-  void _onCategoryTap(Category category) {
-    setState(() {
-      _currentCategory = category;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,15 +42,15 @@ class _ShrineAppState extends State<ShrineApp> {
       // TODO: Change home: to a Backdrop with a HomePage frontLayer (104)
       home: Backdrop(
         // TODO: Make currentCategory field take _currentCategory (104)
-        currentCategory: Category.all,
+        currentCategory: _currentCategory,
         // TODO: Pass _currentCategory for frontLayer (104)
-        frontLayer: HomePage(),
+        frontLayer: HomePage(category: _currentCategory),
         // TODO: Change backLayer field value to CategoryMenuPage (104)
         backLayer: CategoryMenuPage(
           currentCategory: _currentCategory,
           onCategoryTap: _onCategoryTap,
         ),
-        frontTitle: HomePage(category: _currentCategory),
+        frontTitle: const Text('SHRINE'),
         backTitle: Text('MENU'),
       ),
       // TODO: Make currentCategory field take _currentCategory (104)
@@ -69,17 +63,24 @@ class _ShrineAppState extends State<ShrineApp> {
     );
   }
 
-  Route<dynamic>? _getRoute(RouteSettings settings) {
-    if (settings.name != '/login') {
-      return null;
-    }
-
-    return MaterialPageRoute<void>(
-      settings: settings,
-      builder: (BuildContext context) => const LoginPage(),
-      fullscreenDialog: true,
-    );
+  void _onCategoryTap(Category category) {
+    setState(() {
+      _currentCategory = category;
+    });
   }
+
+}
+
+Route<dynamic>? _getRoute(RouteSettings settings) {
+  if (settings.name != '/login') {
+    return null;
+  }
+
+  return MaterialPageRoute<void>(
+    settings: settings,
+    builder: (BuildContext context) => const LoginPage(),
+    fullscreenDialog: true,
+  );
 }
 
 // TODO: Build a Shrine Theme (103)
@@ -110,9 +111,6 @@ ThemeData _buildShrineTheme() {
       ),
       border: CutCornersBorder(),
     ),
-    textButtonTheme: const TextButtonThemeData(
-      
-    )
   );
 }
 

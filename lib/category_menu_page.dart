@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 import 'colors.dart';
 import 'model/product.dart';
@@ -40,13 +39,13 @@ class CategoryMenuPage extends StatelessWidget {
             ],
           )
       : Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Text(
-          categoryString,
-          style: theme.textTheme.bodyText1!.copyWith(
-              color: kShrineBrown900.withAlpha(153)
-            ),
-          textAlign: TextAlign.center,
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: Text(
+            categoryString,
+            style: theme.textTheme.bodyText1!.copyWith(
+                color: kShrineBrown900.withAlpha(153)
+              ),
+            textAlign: TextAlign.center,
         ),
       ),
     );

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-import 'package:shrine/colors.dart';
+import 'colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -27,23 +27,23 @@ class _LoginPageState extends State<LoginPage> {
   // TODO: Add text editing controllers (101)
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _usernameFocusNode = FocusNode();
-  final _passwordFocusNode = FocusNode();
+  // final _usernameFocusNode = FocusNode();
+  // final _passwordFocusNode = FocusNode();
 
-  @override
-  void initState() {
-    super.initState();
-    _usernameFocusNode.addListener(() {
-        setState(() { 
-          //Redraw so that the username label reflects the focus state
-        });
-    });
-    _passwordFocusNode.addListener(() {
-        setState(() { 
-          //Redraw so that the password label reflects the focus state
-        });
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _usernameFocusNode.addListener(() {
+  //       setState(() { 
+  //         //Redraw so that the username label reflects the focus state
+  //       });
+  //   });
+  //   _passwordFocusNode.addListener(() {
+  //       setState(() { 
+  //         //Redraw so that the password label reflects the focus state
+  //       });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -69,29 +69,27 @@ class _LoginPageState extends State<LoginPage> {
             // TODO: Wrap Password with AccentColorOverride (103)
             // TODO: Add TextField widgets (101)
             // [Name]
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                labelText: 'Username',
-                labelStyle: TextStyle(
-                  color: Theme.of(context).colorScheme.secondary,
+            AccentColorOverride(
+              color: kShrineBrown900,
+              child: TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  labelText: 'Username',
                 ),
               ),
-              focusNode: _usernameFocusNode,
             ),
             // spacer
             const SizedBox(height: 12.0),
             // [Password]
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                labelStyle: TextStyle(
-                  color: Theme.of(context).colorScheme.secondary,
+            AccentColorOverride(
+              color: kShrineBrown900,
+              child: TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
                 ),
+                obscureText: true,
               ),
-              obscureText: true,
-              focusNode: _passwordFocusNode,
             ),
             // TODO: Add button bar (101)
             ButtonBar(
@@ -143,3 +141,22 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 // TODO: Add AccentColorOverride (103)
+class AccentColorOverride extends StatelessWidget {
+  const AccentColorOverride(
+      {Key? key, required this.color, required this.child})
+      : super(key: key);
+
+  final Color color;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      child: child,
+      data: Theme.of(context).copyWith(
+        accentColor: color,
+        brightness: Brightness.dark,
+      ),
+    );
+  }
+}

@@ -117,8 +117,8 @@ class _BackdropTitle extends AnimatedWidget {
                   end: const Offset(0.5, 0.0),
                 ).evaluate(animation),
                 child: Semantics(
-                    label: 'hide categories menu',
-                    child: ExcludeSemantics(child: backTitle)),
+                  label: 'hide categories menu',
+                  child: ExcludeSemantics(child: backTitle)),
               ),
             ),
             Opacity(
